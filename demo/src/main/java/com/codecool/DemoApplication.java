@@ -1,4 +1,4 @@
-package com.codecool.demo;
+package com.codecool;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
