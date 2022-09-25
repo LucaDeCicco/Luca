@@ -32,8 +32,18 @@ public class DogController {
     public Dog getRandomDog(Model model){
         DogCreator dogCreator = new DogCreator();
         Dog dog = dogCreator.createRandomDog();
-        DogStorage dogStorage = DogStorage.getInstance();
         return dog;
     }
 
+
+    @PostMapping("addDog/{dogName}/{dogAge}/{dogBreed}")
+    public void addNewDog(@PathVariable(name="dogName") String name,
+                          @PathVariable(name="dogAge") String age,
+                          @PathVariable(name="dogBreed") String breed
+                          ){
+        DogCreator dogCreator = new DogCreator();
+        Dog dog = new Dog(name,Integer.parseInt(age),breed);
+        DogStorage dogStorage = DogStorage.getInstance();
+        dogStorage.addDog(dog);
+    }
 }
