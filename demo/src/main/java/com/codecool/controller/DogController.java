@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @SpringBootApplication
 @RestController
@@ -46,4 +47,20 @@ public class DogController {
         DogStorage dogStorage = DogStorage.getInstance();
         dogStorage.addDog(dog);
     }
+
+    @PutMapping("/updateDog/{dogName}/{dogAge}/{dogBreed}")
+    public void updateDog(@PathVariable(name="dogName") String name,
+                          @PathVariable(name="dogAge") String age,
+                          @PathVariable(name="dogBreed") String breed
+    ){
+        DogStorage dogStorage = DogStorage.getInstance();
+        List<Dog> dogs = dogStorage.getDogs();
+        for (Dog dog : dogs) {
+            if (Objects.equals(dog.getName(), name)){
+                dog.setAge(Integer.parseInt(age));
+                dog.setBreed(breed);
+            }
+        }
+    }
+
 }
